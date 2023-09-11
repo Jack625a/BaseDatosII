@@ -72,3 +72,22 @@ INSERT INTO Autor(
 --SELECT Libro.AutorLibro,Autor.Nombre
 --FROM Libro
 --INNER JOIN Nombretabla ON
+
+
+--CREAR LA ENTIDAD CLIENTE
+CREATE TABLE Cliente(
+    idCliente INT PRIMARY KEY,
+    nombreCliente VARCHAR(50),
+    celular INT(11),
+    correo TEXT
+)
+--cREAR LA ENTIDAD RESERVA
+CREATE TABLE Reserva(
+    idReserva INT PRIMARY KEY,
+    FechaEntrega DATE,
+    FechaDevolucion DATE,
+    idCliente INT,
+    Isbn INT,
+    FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente),
+    FOREIGN KEY (Isbn) REFERENCES Libro(Isbn)
+);
