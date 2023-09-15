@@ -1,13 +1,15 @@
 <?php
-if(isset($_GET["NumeroHabitacion"])){
-    $NumeroHabitacion=$_GET["NumeroHabitacion"];
+if(isset($_GET["CiCliente"])){
+    $CiCliente=$_GET["CiCliente"];
     //echo $NumeroHabitacion;
     //Obtencion de los atributos de la Entidad (POST)
     if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $nuevoTipo=$_POST["nuevoTipo"];
-        $nuevoPrecio=$_POST["nuevoPrecio"];
-        $nuevoEstado=$_POST["nuevoEstado"];
-        $nuevoDescripcion=$_POST["nuevoDescripcion"];
+        $nuevoNombre=$_POST["nuevoNombre"];
+        $nuevoApellido=$_POST["nuevoApellido"];
+        $nuevoCorreo=$_POST["nuevoCorreo"];
+        $nuevoCelular=$_POST["nuevoCelular"];
+        $nuevoDireccion=$_POST["nuevoDireccion"];
+        $nuevoEdad=$_POST["nuevoEdad"];
         //Variables para realizar la conexion con mysql
             $servername='localhost';
             $username='root';
@@ -23,7 +25,7 @@ if(isset($_GET["NumeroHabitacion"])){
             }
             //echo "Conexion exitosa"."<br>";
             //ACTUALIZAR LOS DATOS DE LA HABITACION
-    $sql="UPDATE habitacion SET NumeroHabitacion='$NumeroHabitacion',Tipo='$nuevoTipo', Precio='$nuevoPrecio', Estado='$nuevoEstado', Descripcion='$nuevoDescripcion' WHERE NumeroHabitacion=$NumeroHabitacion";
+    $sql="UPDATE cliente SET CiCliente='$CiCliente',Nombre='$nuevoNombre', Apellido='$nuevoApellido', Correo='$nuevoCorreo', Celular='$nuevoCelular', Direccion='$nuevoDireccion', Edad='$nuevoEdad' WHERE CiCliente=$CiCliente";
         if($conn->query($sql)===TRUE){
             header("Location:inicio.php");//Redirigir a la pagina principal
             exit();
@@ -39,22 +41,24 @@ if(isset($_GET["NumeroHabitacion"])){
     if($conn->connect_error){
         die ("Conexion Fallida");
     }
-    $sql="SELECT * FROM habitacion WHERE NumeroHabitacion=$NumeroHabitacion";
+    $sql="SELECT * FROM cliente WHERE CiCliente=$CiCliente";
     $resultado=$conn->query($sql);
     if($resultado->num_rows==1){
         $row=$resultado->fetch_assoc();
-        $tipoActual=$row["Tipo"];
-        $precioActual=$row["Precio"];
-        $estadoActual=$row["Estado"];
-        $descripcionActual=$row["Descripcion"];
+        $nombreActual=$row["Nombre"];
+        $apellidoActual=$row["Apellido"];
+        $correoActual=$row["Correo"];
+        $celularActual=$row["Celular"];
+        $direccionActual=$row["Direccion"];
+        $edadActual=$row["Edad"];
     }
     else{
-        echo "Habitacion no econtrada";
+        echo "Usuario no econtrado";
     }
     $conn->close();
     }
 }else{
-    echo "Error Numero de habitacion no especificada";
+    echo "Error Ci Cliente no especificada";
 }    
 ?>
 <!DOCTYPE html>
@@ -99,25 +103,33 @@ if(isset($_GET["NumeroHabitacion"])){
   <h1>Actualiazación de Datos</h1>
     <form action="actualizar.php?NumeroHabitacion=<?php echo $NumeroHabitacion ?>" method="post">
         <div class="form-group">
-            <label for="nuevoTipo">Nuevo Tipo: </label>
-            <input type="text" name="nuevoTipo" id="nuevoTipo" class="form-control" value="<?php echo $tipoActual ?>" required>
+            <label for="nuevoNombre">Nuevo Nombre: </label>
+            <input type="text" name="nuevoNombre" id="nuevoNombre" class="form-control" value="<?php echo $nombreActual ?>" required>
         
         </div>
         <div class="form-group">
-        <label for="nuevoPrecio">Nuevo Precio: </label>
-        <input type="number" name="nuevoPrecio" class="form-control"value="<?php echo $precioActual ?>" required>
+        <label for="nuevoApellido">Nuevo Apellido: </label>
+        <input type="text" name="nuevoApellido" class="form-control"value="<?php echo $apellidoActual ?>" required>
         
         </div>
         <div class="form-group">
-        <label for="nuevoEstado">Nuevo Estado: </label>
-        <input type="text" name="nuevoEstado" class="form-control" value="<?php echo $estadoActual ?>" required>
+        <label for="nuevoCorreo">Nuevo Correo: </label>
+        <input type="email" name="nuevoCorreo" class="form-control" value="<?php echo $correoActual ?>" required>
         </div>
         <div class="form-group">
-          <label for="nuevoDescripcion">Nuevo Descripcion: </label>
-          <input type="text" name="nuevoDescripcion" class="form-control"value="<?php echo $descripcionActual ?> " required>
+          <label for="nuevoCelular">Nuevo Celular: </label>
+          <input type="number" name="nuevoCelular" class="form-control"value="<?php echo $celularActual ?> " required>
         </div>
         <div class="form-group">
-        <input type="submit" value="Actualizar Habitacion" class="form-control">
+          <label for="nuevoDireccion">Nuevo Direccion: </label>
+          <input type="text" name="nuevoDireccion" class="form-control"value="<?php echo $direccionActual ?> " required>
+        </div>
+        <div class="form-group">
+          <label for="nuevoEdad">Nuevo Edad: </label>
+          <input type="number" name="nuevoEdad" class="form-control"value="<?php echo $edadActual ?> " required>
+        </div>
+        <div class="form-group">
+        <input type="submit" value="Actualizar Cliente" class="form-control">
         </div>
         
     </form>

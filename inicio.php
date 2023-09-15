@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +29,8 @@
           <a class="nav-link" href="reservas.php">Reservas</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar Habitacion" aria-label="Search">
+      <form class="d-flex" action="buscar_habitacion.php" method="POST">
+        <input class="form-control me-2" type="number" placeholder="Buscar Habitacion" name="numeroHabitacionBuscar" id="numeroHabitacionBuscar" aria-label="Search" required>
         <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>
@@ -88,6 +89,70 @@
         ?>
     </table>
     </div>
+    <br>
+    <br>
+    <div class="container">
+    <h1>Listado de Clientes</h1>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Ci Cliente</th>
+            <th>Nombre </th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Celular</th>
+            <th>Direccion</th>
+            <th>Edad</th>
+        </tr>
+        <?php
+            //Mostrar los datos en la tabla
+            //Variables para realizar la conexion con mysql
+            $servername='localhost';
+            $username='root';
+            $password='';
+            $database='hotel';
+
+            //crear una conexion
+            $conn= new mysqli($servername,$username,$password,$database);
+
+            //Verificacion de la conexion 
+            if($conn->connect_error){
+                die("Conexion Fallida: ".$conn->connect_error);
+            }
+            //echo "Conexion exitosa"."<br>";
+
+        $sql="SELECT * FROM cliente";
+        $resultado=$conn->query($sql);
+        if($resultado->num_rows>0){
+            while($row=$resultado->fetch_assoc()){
+                echo "<tr>";
+                echo "<td>". $row["CiCliente"]."</td>";
+                echo "<td>". $row["Nombre"]."</td>";
+                echo "<td>". $row["Apellido"]."</td>";
+                echo "<td>". $row["Correo"]."</td>";
+                echo "<td>". $row["Celular"]."</td>";
+                echo "<td>". $row["Direccion"]."</td>";
+                echo "<td>". $row["Edad"]."</td>";
+                
+                echo "<td><a href='actualizarUsuario.php?CiCliente=".$row["CiCliente"]."'>Actualizar</a></td>";
+                echo "<td><a href='eliminarUsuario.php?CiCliente=".$row["CiCliente"]."'>Eliminar</a></td>";
+                
+                echo "</tr>";
+
+                
+            }
+        }else
+        {
+            echo "Error no existen registros";
+        }
+        $conn->close();
+        ?>
+    </table>
+    </div>
+
+
+
+
+
     
 
 </body>
