@@ -76,7 +76,8 @@
                 
                 echo "<td><a href='actualizar.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>Actualizar</a></td>";
                 echo "<td><a href='eliminar.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>Eliminar</a></td>";
-                
+                echo "<td><a href='reservas.php?Tipo=".$row["Tipo"]."'>Reservar</a></td>";
+      
                 echo "</tr>";
 
                 
@@ -135,6 +136,7 @@
                 
                 echo "<td><a href='actualizarUsuario.php?CiCliente=".$row["CiCliente"]."'>Actualizar</a></td>";
                 echo "<td><a href='eliminarUsuario.php?CiCliente=".$row["CiCliente"]."'>Eliminar</a></td>";
+                
                 
                 echo "</tr>";
 

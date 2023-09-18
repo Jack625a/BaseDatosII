@@ -118,7 +118,7 @@ if(isset($_GET["CiCliente"])){
         </div>
         <div class="form-group">
           <label for="nuevoCelular">Nuevo Celular: </label>
-          <input type="number" name="nuevoCelular" class="form-control"value="<?php echo $celularActual ?> " required>
+          <input type="tel" name="nuevoCelular" class="form-control"value="<?php echo $celularActual ?> " required>
         </div>
         <div class="form-group">
           <label for="nuevoDireccion">Nuevo Direccion: </label>
@@ -126,10 +126,11 @@ if(isset($_GET["CiCliente"])){
         </div>
         <div class="form-group">
           <label for="nuevoEdad">Nuevo Edad: </label>
-          <input type="number" name="nuevoEdad" class="form-control"value="<?php echo $edadActual ?> " required>
+          <input type="text" name="nuevoEdad" class="form-control" value="<?php echo $edadActual ?> " required>
         </div>
         <div class="form-group">
         <input type="submit" value="Actualizar Cliente" class="form-control">
+        
         </div>
         
     </form>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +36,104 @@
     </div>
   </div>
 </nav>
+<div class="container mt-5">
+  <h2>Realizar Reserva</h2>
+  <form action="procesarReserva.php" method="POST">
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <label for="ciCliente">Buscar Cliente por CI: </label>
+        <input type="number" class="form-control" id="ciCliente" name="ciCliente" required>
+        <button type="button" class="btn btn-outline-success mt-2" onclick="comprobarCliente()">
+            Comprobar Cliente
+        </button>
+      </div>
+      <br>
+      <div class="form-group col-md-6" >
+        <label for="tipHabitacion">Seleccionar Tipo de Habitación: </label>
+        
+        <?php
+
+          $tipoInicio="";
+          //Variables para realizar la conexion con mysql
+          $servername='localhost';
+          $username='root';
+          $password='';
+          $database='hotel';
+
+          //crear una conexion
+          $conn= new mysqli($servername,$username,$password,$database);
+
+          //Verificacion de la conexion 
+          if($conn->connect_error){
+              die("Conexion Fallida: ".$conn->connect_error);
+          }
+          //echo "Conexion exitosa"."<br>";
+          //obtenr los datos con la consulta SQL
+          $sql="SELECT DISTINCT Tipo FROM habitacion";
+          $resultado=$conn->query($sql);
+          if($resultado->num_rows>0){
+            echo ' <select name="tipoHabitacion" id="tipoHabitacion" class="form-control"> ';
+            while ($row=$resultado->fetch_assoc()){
+              if($tipoInicio==""){
+                echo "<option value='".$row["Tipo"]."'>".$row["Tipo"]. "</option>";
+              }else{
+                echo "<option value='".$row["Tipo"]."disabled' >".$tipoInicio. "</option>";
+              }
+              
+
+            }
+            echo ' </select> ';
+          }else{
+            echo "No hay habitaciones registradas";
+          }
+          $conn->close();
+        ?>        
+      </div>
+          <br>
+      <div class="form-group col-md-6">
+        <label for="fechaEntrada">Seleccionar Fecha de Entrada: </label>
+        <input type="date" name="fechaEntrada" id="fechaEntrada" class="form-control" required >
+      </div>
+      <br>
+      <div class="form-group col-md-6">
+        <label for="fechaSalida">Seleccionar Fecha de Salida: </label>
+        <input type="date" name="fechaSalida" id="fechaSalida" class="form-control" required >
+      </div>
+      <br>
+      <div class="form-group col-md-6">
+        <label for="numeroPersonas">Numero de Personas: </label>
+        <input type="number" class="form-control" id="numeroPersonas" name="numeroPersonas" required>
+      </div>
+      <br>
+      <div class="form-group col-md-6" >
+          <label for="tipoPago">Tipo de Pago: </label>
+          <select name="tipoPago" id="tipoPago" class="form-control" required>
+            <option value="">Pago QR</option>
+          </select>
+      </div>
+      <br>
+          <div class="form-group col-md-6" >
+              <button type="submit" class="btn btn-outline-success" id="reservar">
+              Realizar reserva
+              </button>
+          </div>
+      <br>
+      <br>
+
+    </div>
+    <script>
+      function comprobarCliente(){
+        var ciCliente=document.getElementById("ciCliente").value;
+        $.post("comprobarCliente.php",{ciCliente:ciCliente}, function(data){
+          alert(data);
+        });
+      }
+    </script>
+
+
+  </form>
+
+</div>
 
 
 
