@@ -28,6 +28,9 @@
         <li class="nav-item">
           <a class="nav-link" href="reservas.php">Reservas</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="reporteReservas.php">Reporte Reservas</a>
+        </li>
       </ul>
       <form class="d-flex" action="buscar_habitacion.php" method="POST">
         <input class="form-control me-2" type="number" placeholder="Buscar Habitacion" name="numeroHabitacionBuscar" id="numeroHabitacionBuscar" aria-label="Search" required>

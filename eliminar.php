@@ -31,5 +31,7 @@ if(isset($_GET["NumeroHabitacion"])){
             $conn->close();
 }else{
     echo "Error Numero de habitacion no especificada";
+    header("Location:inicio.php");//redirigir de nuevo a la pagina principal
+    exit();
 }
 ?>
