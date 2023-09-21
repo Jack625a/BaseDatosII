@@ -28,6 +28,9 @@
         <li class="nav-item">
           <a class="nav-link" href="reservas.php">Reservas</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="reporteReservas.php">Reporte Reservas</a>
+        </li>
       </ul>
       <form class="d-flex" action="buscar_habitacion.php" method="POST">
         <input class="form-control me-2" type="number" placeholder="Buscar Habitacion" name="numeroHabitacionBuscar" id="numeroHabitacionBuscar" aria-label="Search" required>
@@ -69,13 +72,16 @@
           }
           //echo "Conexion exitosa"."<br>";
           //obtenr los datos con la consulta SQL
-          $sql="SELECT DISTINCT Tipo FROM habitacion";
+          $sql="SELECT NumeroHabitacion, Tipo FROM habitacion";
           $resultado=$conn->query($sql);
           if($resultado->num_rows>0){
+               
             echo ' <select name="tipoHabitacion" id="tipoHabitacion" class="form-control"> ';
             while ($row=$resultado->fetch_assoc()){
+              $numeroHabitacionReserva=$row["NumeroHabitacion"];
+              echo $numeroHabitacionReserva;
               if($tipoInicio==""){
-                echo "<option value='".$row["Tipo"]."'>".$row["Tipo"]. "</option>";
+                echo "<option value='".$row["NumeroHabitacion"]."'>".$row["Tipo"]. "</option>";
               }else{
                 echo "<option value='".$row["Tipo"]."disabled' >".$tipoInicio. "</option>";
               }
@@ -90,6 +96,11 @@
         ?>        
       </div>
           <br>
+
+        <div class="form-group col-md-6">
+          <label for="numeroHabitacionReserva">Numero de Habitación</label>
+          <input type="text" value='<?php $numeroHabitacionReserva;?>'>
+        </div>
       <div class="form-group col-md-6">
         <label for="fechaEntrada">Seleccionar Fecha de Entrada: </label>
         <input type="date" name="fechaEntrada" id="fechaEntrada" class="form-control" required >

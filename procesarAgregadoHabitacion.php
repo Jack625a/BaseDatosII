@@ -24,7 +24,7 @@
         }
         //echo "Conexion exitosa"."<br>";
         //Codigo SQL PARA INSERTAR NUEVOS REGISTROS (INSERT INTO)
-        $sql="INSERT INTO habitacion (NumeroHabitacion, Tipo, Precio, Estado, Descripcion) VALUES ('$numeroHabitacion','$tipo','$precio','$estado','$descripcion')";
+        $sql="INSERT INTO habitacion (NumeroHabitacion, Tipo, Precio, Estado, Descripcion, Disponibilidad) VALUES ('$numeroHabitacion','$tipo','$precio','$estado','$descripcion','Disponible')";
         if($conn->query($sql)===TRUE){
             //echo "Nueva habitacion agregado correctamente";
             header("Location:inicio.php");//redirigir de nuevo a la pagina principal

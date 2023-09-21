@@ -41,13 +41,14 @@
 </nav>
     <div class="container">
     <h1>Listado de Habitaciones</h1>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Numero de Habitacion</th>
             <th>Tipo de Habitacion </th>
             <th>Precio</th>
             <th>Estado</th>
             <th>Descripcion</th>
+            <th>Disponibilidad</th>
         </tr>
         <?php
             //Mostrar los datos en la tabla
@@ -76,6 +77,7 @@
                 echo "<td>". $row["Precio"]."</td>";
                 echo "<td>". $row["Estado"]."</td>";
                 echo "<td>". $row["Descripcion"]."</td>";
+                echo "<td>". $row["Disponibilidad"]."</td>";
                 
                 echo "<td><a href='actualizar.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>Actualizar</a></td>";
                 echo "<td><a href='eliminar.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>Eliminar</a></td>";
@@ -97,7 +99,7 @@
     <br>
     <div class="container">
     <h1>Listado de Clientes</h1>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Ci Cliente</th>
             <th>Nombre </th>

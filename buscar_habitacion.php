@@ -51,6 +51,9 @@
             echo   '      <li class="nav-item">';
             echo   '       <a class="nav-link" href="reservas.php">Reservas</a>';
             echo   '      </li>';
+            echo   '<li class="nav-item">
+            <a class="nav-link" href="reporteReservas.php">Reporte Reservas</a>
+          </li>';
             echo   '     </ul>';
             echo   '     <form class="d-flex" action="buscar_habitacion.php" method="POST">';
             echo   '      <input class="form-control me-2" type="number" placeholder="Buscar Habitacion" aria-label="Search" required>';
