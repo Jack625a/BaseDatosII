@@ -8,6 +8,7 @@
     $ciCliente=$_POST["ciCliente"];
     $numeroPersonas=$_POST["numeroPersonas"];
     $tipoPago=$_POST["tipoPago"];
+    $numeroHabitacionReserva=$_POST["numeroHabitacionReserva"];
 
     //realizar la conexion con la base de datos
     //Variables para realizar la conexion con mysql
@@ -25,7 +26,7 @@
     }
     //echo "Conexion exitosa"."<br>";
     //Codigo SQL para realizar una nueva reserva
-    $sql="INSERT INTO `reserva`(`TipoHabitacion`, `FechaEntrada`, `FechaSalida`, `CiCliente`, `NumeroPersonas`, `TipoPago`) VALUES ('$tipoHabitacion','$fechaEntrada','$fechaSalida','$ciCliente','$numeroPersonas','$tipoPago')";
+    $sql="INSERT INTO reserva (`TipoHabitacion`, `FechaEntrada`, `FechaSalida`, `CiCliente`, `NumeroPersonas`, `TipoPago`, `NumeroHabitacionReserva`) VALUES ('$tipoHabitacion','$fechaEntrada','$fechaSalida','$ciCliente','$numeroPersonas','$tipoPago','$numeroHabitacionReserva')";
     if($conn->query($sql)===TRUE){
         //echo "Reserva realizada con exito";
         header("Location:inicio.php");//redirigir de nuevo a la pagina principal
@@ -41,11 +42,5 @@
    }
 
 
-
-
-
-
-
-
-    
+  
 ?>

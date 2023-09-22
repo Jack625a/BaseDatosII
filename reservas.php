@@ -43,7 +43,7 @@
   <h2>Realizar Reserva</h2>
   <form action="procesarReserva.php" method="POST">
     <div class="form-row">
-      <div class="form-group col-md-6" >
+      <div class="form-group col-md-4" >
         <label for="ciCliente">Buscar Cliente por CI: </label>
         <input type="number" class="form-control" id="ciCliente" name="ciCliente" required>
         <button type="button" class="btn btn-outline-success mt-2" onclick="comprobarCliente()">
@@ -51,8 +51,8 @@
         </button>
       </div>
       <br>
-      <div class="form-group col-md-6" >
-        <label for="tipoHabitacion">Seleccionar Tipo de Habitación: </label>
+      <div class="form-group col-md-4" >
+        <label for="tipoHabitacion">Seleccionar Tipo de Habitación Disponible: </label>
         
         <?php
 
@@ -72,16 +72,15 @@
           }
           //echo "Conexion exitosa"."<br>";
           //obtenr los datos con la consulta SQL
-          $sql="SELECT NumeroHabitacion, Tipo FROM habitacion";
+          $sql="SELECT Tipo, Disponibilidad FROM habitacion WHERE Disponibilidad='Disponible'";
           $resultado=$conn->query($sql);
           if($resultado->num_rows>0){
                
             echo ' <select name="tipoHabitacion" id="tipoHabitacion" class="form-control"> ';
             while ($row=$resultado->fetch_assoc()){
-              $numeroHabitacionReserva=$row["NumeroHabitacion"];
-              echo $numeroHabitacionReserva;
+                           
               if($tipoInicio==""){
-                echo "<option value='".$row["NumeroHabitacion"]."'>".$row["Tipo"]. "</option>";
+                echo "<option value='".$row["Tipo"]."'>".$row["Tipo"]. "</option>";
               }else{
                 echo "<option value='".$row["Tipo"]."disabled' >".$tipoInicio. "</option>";
               }
@@ -93,13 +92,15 @@
             echo "No hay habitaciones registradas";
           }
           $conn->close();
+
+          
         ?>        
       </div>
           <br>
 
         <div class="form-group col-md-6">
           <label for="numeroHabitacionReserva">Numero de Habitación</label>
-          <input type="text" value='<?php $numeroHabitacionReserva;?>'>
+          <input type="text" id="numeroHabitacionReserva" name="numeroHabitacionReserva" class="form-control" readonly >
         </div>
       <div class="form-group col-md-6">
         <label for="fechaEntrada">Seleccionar Fecha de Entrada: </label>
@@ -132,6 +133,16 @@
       <br>
 
     </div>
+    <script>
+      //agregar un evento (seleccion de un tipo de habitacion) actualizar el campo de Numero de Habitacion
+          document.getElementById('tipoHabitacion').addEventListener("change", function(){
+            var seleccionOpcion=this.options[this.selectedIndex];
+            var numeroHabitacion=seleccionOpcion.value;
+
+          //actualizar el campo numero de habitacion
+          document.getElementById('numeroHabitacionReserva').value=numeroHabitacion;
+          });
+    </script>
   </form>
   
 </div>

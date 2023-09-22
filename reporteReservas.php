@@ -127,6 +127,7 @@
             <th>Ci Cliente</th>
             <th>Numero de Personas</th>
             <th>Tipo de Pago</th>
+            <th>Numero de Habitacion</th>
         </tr>
     </thead>
     <tbody>
@@ -165,6 +166,7 @@
                     echo  "<td>".$row["CiCliente"]. "</td>"; 
                     echo  "<td>".$row["NumeroPersonas"]. "</td>"; 
                     echo  "<td>".$row["TipoPago"]. "</td>";
+                    echo  "<td>".$row["NumeroHabitacionReserva"]. "</td>";
                     echo "</tr>";
                 }
             }else{
