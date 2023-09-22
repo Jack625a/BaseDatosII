@@ -1,3 +1,26 @@
+<?php
+if(isset($_GET["Tipo"])){
+    $TipoHabitacion=$_GET["Tipo"];
+    //echo $TipoHabitacion;
+
+    //Conectarnos con la base de datos
+    //Mostrar los datos en la tabla
+            //Variables para realizar la conexion con mysql
+            $servername='localhost';
+            $username='root';
+            $password='';
+            $database='hotel';
+
+            //crear una conexion
+            $conn= new mysqli($servername,$username,$password,$database);
+
+            //Verificacion de la conexion 
+            if($conn->connect_error){
+                die("Conexion Fallida: ".$conn->connect_error);
+            }
+            //echo "Conexion exitosa"."<br>";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +79,7 @@
         
         <?php
 
-          $tipoInicio="";
+          
           //Variables para realizar la conexion con mysql
           $servername='localhost';
           $username='root';
@@ -79,10 +102,10 @@
             echo ' <select name="tipoHabitacion" id="tipoHabitacion" class="form-control"> ';
             while ($row=$resultado->fetch_assoc()){
                            
-              if($tipoInicio==""){
+              if($TipoHabitacion==""){
                 echo "<option value='".$row["Tipo"]."'>".$row["Tipo"]. "</option>";
               }else{
-                echo "<option value='".$row["Tipo"]."disabled' >".$tipoInicio. "</option>";
+                echo "<option value='$TipoHabitacion' readonly>".$TipoHabitacion. "</option>";
               }
               
 
@@ -120,7 +143,10 @@
       <div class="form-group col-md-6" >
           <label for="tipoPago">Tipo de Pago: </label>
           <select name="tipoPago" id="tipoPago" class="form-control">
-            <option value="">Pago QR</option>
+            <option value="Pago QR">Pago QR</option>
+            <option value="Tigo Money">Tigo Money</option>
+            <option value="Trasnferencia Bancaria">Trasnferencia Bancaria</option>
+            <option value="Pago en Efectivo">Pago en Efectivo</option>
           </select>
       </div>
       <br>

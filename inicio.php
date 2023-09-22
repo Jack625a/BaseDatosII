@@ -77,11 +77,12 @@
                 echo "<td>". $row["Precio"]."</td>";
                 echo "<td>". $row["Estado"]."</td>";
                 echo "<td>". $row["Descripcion"]."</td>";
-                echo "<td>". $row["Disponibilidad"]."</td>";
-                
+                echo "<td><a href='actulizarDisponibilidad.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>". $row["Disponibilidad"]."</a></td>";
+                               
                 echo "<td><a href='actualizar.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>Actualizar</a></td>";
                 echo "<td><a href='eliminar.php?NumeroHabitacion=".$row["NumeroHabitacion"]."'>Eliminar</a></td>";
                 echo "<td><a href='reservas.php?Tipo=".$row["Tipo"]."'>Reservar</a></td>";
+                
       
                 echo "</tr>";
 
