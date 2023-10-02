@@ -1,19 +1,22 @@
+//conexion con la API
 const apiKey = '';
 const apiUrl = '';
 
-
+//SOLICITUD PARA EL ACCESO A LOS DATOS
 fetch(apiUrl, {
     headers: {
         Authorization: `Bearer ${apiKey}`
     }
 })
+
+//OBTNECION DE LOS DATOS
 .then(response => response.json())
 .then(data => {
     const products = data.records;
     const productLista = document.querySelector('.lista-productos');
 
     let productHTML = ''; // Inicializa una cadena para acumular los productos
-
+//Iniciamos el recorrido a los datos obtenidos de Airtable
     products.forEach((product, index) => {
         const nombre = product.fields.Nombre;
         
@@ -44,7 +47,7 @@ fetch(apiUrl, {
                             <input type="number" class="form-control" placeholder="Cantidad" aria-label="Cantidad" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <!-- Botón dinámico para agregar al carrito -->
-                                <button class="btn btn-primary addToCart">Agregar al Carrito</button>
+                                <button class="btn btn-success addToCart">Agregar al Carrito</button>
                             </div>
                         </div>
                     </div>

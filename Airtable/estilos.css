@@ -1,0 +1,9 @@
+.card{
+    border: 2px solid #ddddddd4;
+    border-radius: 20px;
+    height: 100%;
+
+}
+.card:hover{
+    transform: translateY(-5px);
+}
